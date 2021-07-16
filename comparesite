@@ -8,12 +8,10 @@ curl $url -o $domain.txt
 
 curl -H 'Cache-Control: no-cache' $url  --resolve $domain:443:$IP -o $domain@$IP.txt
 
-diff $domain.txt $domain@$IP.txt > diff-$domain
-
-less diff-$domain
+diff $domain.txt $domain@$IP.txt | less
 
 rm $domain.txt
 rm $domain@$IP.txt
-rm diff-$domain
+
 
 
