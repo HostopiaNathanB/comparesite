@@ -1,0 +1,19 @@
+#!/bin/bash
+
+url=$1
+IP=$2
+domain=$(echo $url | cut -d / -f 3)
+
+curl $url -o $domain.txt
+
+curl -H 'Cache-Control: no-cache' $url  --resolve $domain:443:$IP -o $domain@$IP.txt
+
+diff $domain.txt $domain@$IP.txt > diff-$domain
+
+less diff-$domain
+
+rm $domain.txt
+rm $domain@$IP.txt
+rm diff-$domain
+
+
